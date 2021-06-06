@@ -1,0 +1,82 @@
+{
+  "RecipeFormatVersion": "2020-01-25",
+  "ComponentName": "aws.greengrass.DLRImageClassification",
+  "ComponentVersion": "2.1.2",
+  "ComponentType": "aws.greengrass.generic",
+  "ComponentDescription": "Sample recipe - Image classification inference using DLR and resnet50 default model.",
+  "ComponentPublisher": "AWS",
+  "ComponentConfiguration": {
+    "DefaultConfiguration": {
+      "accessControl": {
+        "aws.greengrass.ipc.mqttproxy": {
+          "aws.greengrass.DLRImageClassification:mqttproxy:1": {
+            "policyDescription": "Allows access to publish via topic ml/dlr/image-classification.",
+            "operations": [
+              "aws.greengrass#PublishToIoTCore"
+            ],
+            "resources": [
+              "ml/dlr/image-classification"
+            ]
+          }
+        }
+      },
+      "ImageName": "strawberry.jpg",
+      "InferenceInterval": "5",
+      "PublishResultsOnTopic": "ml/dlr/image-classification",
+      "ModelResourceKey": {
+        "armv7l": "model",
+        "aarch64": "model",
+        "x86_64": "model"
+      }
+    }
+  },
+  "ComponentDependencies": {
+    "variant.DLR.ImageClassification.ModelStore": {
+      "VersionRequirement": ">=2.1.2 <2.2.0",
+      "DependencyType": "HARD"
+    },
+    "variant.DLR": {
+      "VersionRequirement": ">=1.6.1 <1.7.0",
+      "DependencyType": "HARD"
+    },
+    "aws.greengrass.Nucleus": {
+      "VersionRequirement": ">=2.0.0 <2.2.0",
+      "DependencyType": "SOFT"
+    }
+  },
+  "Manifests": [
+    {
+      "Platform": {
+        "os": "linux",
+        "architecture": "amd64"
+      },
+      "Lifecycle": {
+        "Install": "python3 -m pip install --upgrade Pillow",
+        "setEnv": {
+          "DLR_IC_MODEL_DIR": "{variant.DLR.ImageClassification.ModelStore:artifacts:decompressedPath}/{configuration:/ModelResourceKey/x86_64}",
+          "DEFAULT_DLR_IC_IMAGE_DIR": "{artifacts:decompressedPath}/image_classification/sample_images/"
+        },
+        "run": {
+          "RequiresPrivilege": "true",
+          "script": "\n                                    export PATH=\"{variant.DLR:configuration:/MLRootPath}/greengrass_ml_dlr_conda/bin:$PATH\"\n                                    eval \"$({variant.DLR:configuration:/MLRootPath}/greengrass_ml_dlr_conda/bin/conda shell.bash hook)\"\n                                    conda activate greengrass_ml_dlr_conda\n                                    python3 {artifacts:decompressedPath}/image_classification/inference.py"
+        }
+      },
+      "Artifacts": [
+        {
+          "Uri": "s3://sagemaker-us-east-1-143656149352/ggv2/artifacts/image_classification.zip",
+          "Unarchive": "ZIP",
+          "Permission": {
+            "Read": "OWNER",
+            "Execute": "NONE"
+          }
+        }
+      ]
+    }
+  ],
+  "Lifecycle": {}
+}
+
+sudo /greengrass/v2/bin/greengrass-cli deployment list
+
+sudo /greengrass/v2/bin/greengrass-cli --ggcRootPath /greengrass/v2 deployment create --remove "com.example.HelloWorld"
+aws greengrassv2 cancel-deployment --deployment-id a42e36c7-3d64-4b15-8df1-b5baee28f4cd

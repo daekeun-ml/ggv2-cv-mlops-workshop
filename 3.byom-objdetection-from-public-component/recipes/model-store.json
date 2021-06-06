@@ -1,0 +1,34 @@
+{
+  "RecipeFormatVersion": "2020-01-25",
+  "ComponentName": "variant.TensorFlowLite.ObjectDetection.ModelStore",
+  "ComponentVersion": "2.1.5",
+  "ComponentType": "aws.greengrass.generic",
+  "ComponentDescription": "Downloads the YOLOv4 object detection ML model to the device as artifacts",
+  "ComponentPublisher": "AWS",
+  "ComponentDependencies": {
+    "aws.greengrass.Nucleus": {
+      "VersionRequirement": ">=2.0.0 <2.2.0",
+      "DependencyType": "SOFT"
+    }
+  },
+  "Manifests": [
+    {
+      "Platform": {
+        "os": "linux",
+        "architecture": "amd64"
+      },
+      "Lifecycle": {},
+      "Artifacts": [
+        {
+          "Uri": "s3://sagemaker-us-east-1-143656149352/ggv2/models/yolov4-model.zip",
+          "Unarchive": "ZIP",
+          "Permission": {
+            "Read": "OWNER",
+            "Execute": "NONE"
+          }
+        }
+      ]
+    }
+  ],
+  "Lifecycle": {}
+}
