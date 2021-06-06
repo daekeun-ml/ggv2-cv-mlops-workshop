@@ -1,0 +1,10 @@
+# Jupyter notebook temp files
+.ipynb_checkpoints
+**/.ipynb_checkpoints/*
+
+# Python temp files
+**/*.pyc
+.codes/**/__pycache__/
+
+# Mac temp files
+**/.DS_Store
