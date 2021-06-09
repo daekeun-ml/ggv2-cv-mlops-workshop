@@ -8,6 +8,8 @@ All the codes work normally, but there are many parts that need to be changed ma
 
 ## 1. DLR Image Classification From Scratch
 ---
+Clone this github repo, then go to `1.byom-imgclassification-from-scratch` folder.
+
 ### Overview
 This example is written from scratch and it is a good place to start after 'Hello World' example.
 
@@ -15,7 +17,7 @@ This example is written from scratch and it is a good place to start after 'Hell
 
 ### Deploy Model and Inference codes
 1. Please execute the Greengrass Setup of the reference url. https://greengrassv2.workshop.aws/en/chapter3_greengrasssetup.html
-2. Modify the config.json file in the editor to suit your environment.
+2. Modify the `config.json` file in the editor to suit your environment.
     ```json
     {
         "Project": {
@@ -71,6 +73,8 @@ This example is written from scratch and it is a good place to start after 'Hell
 
 ## 2. DLR Image Classification From Public Component
 ---
+Clone this github repo, then go to `2.byom-imgclassification-from-public-component` folder.
+
 ### Overview    
 
 AWS has provided public components since IoT Greengrass v2, and you can freely import and deploy your models by modifying some logic without having to write code from scratch.
@@ -119,6 +123,7 @@ AWS has provided public components since IoT Greengrass v2, and you can freely i
 
 ## 3. TFLite Object Detection From Public Component
 ---
+Clone this github repo, then go to `3.byom-objdetection-from-public-component` folder.
 
 ### Overview    
 
