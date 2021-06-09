@@ -9,23 +9,47 @@ All the codes work normally, but there are many parts that need to be changed ma
 ## 1. DLR Image Classification From Scratch
 ---
 ### Overview
-This example is written from scratch and it is a good place to start after 'Helloworld' example.
+This example is written from scratch and it is a good place to start after 'Hello World' example.
 
 **Model**: The model used in this example is the result of compiling PyTorch's torchvision pre-trained ResNet-18 with SageMaker Neo. For how to compile SageMaker Neo, see https://github.com/aws-samples/sagemaker-inference-samples-us/blob/main/pytorch-serving-neo.ipynb
 
 ### Deploy Model and Inference codes
 1. Please execute the Greengrass Setup of the reference url. https://greengrassv2.workshop.aws/en/chapter3_greengrasssetup.html
-2. Compress all contents of the `artifacts` folder into `my-model.zip` and upload it to your S3 bucket.
-3. Edit the `com.example.ImgClassification-1.0.0.json` file in the `recipes` folder.
-   ```
-    "Artifacts": [
-        {
-            "URI": "s3://[YOUR-S3-BUCKET]/my-model.zip",
-            "Unarchive": "ZIP"
+2. Modify the config.json file in the editor to suit your environment.
+    ```json
+    {
+        "Project": {
+            "Name": "MLInferenceFromScratch",
+            "Account": "12345*******",
+            "Region": "us-east-1",
+            "Profile": "ggv2-demo"
+        },
+        "Component": {
+            "ComponentName": "com.example.ImgClassification",
+            "ComponentVersion": "1.0.0",
+            "SendMessage": "True",
+            "Topic": "ml/example/imgclassification2",
+            "PredictionIntervalSecs": 5,
+            "Timeout": 10
+        },
+        "Artifacts": {
+            "S3Bucket": "sagemaker-us-east-1-143656149352",
+            "S3Prefix": "ggv2/artifacts",
+            "ZipArchiveName": "my-model"
+        },
+        "Parameters": {
+            "ScoreThreshold": 0.25,
+            "MaxNumClasses": 3,
+            "ModelInputShape": "(224,224)"
         }
-    ]
-   ```
-4. Deploy the component. We recommend deploying from the web console or using the AWS CLI.
+    } 
+    ```
+3. Run the `init.sh` file on your local machine or the Cloud9 IDE. In this cell script, the following tasks are performed automatically.
+   * Modify json recipe file in `recipes` folder.
+   * Modify `config_utils.py` in `artifacts` folder.
+   * Compress all contents of the `artifacts` folder into zip file and upload it to your S3 bucket.
+   * Register your custom component to Greengrass v2. 
+4. Deploy the component. We recommend deploying from the web console or using the greengrass-cli.
 5. Open a new terminal window in the Cloud9 IDE to check the greengrass log and component log. 
     ```
     $ sudo tail -f /greengrass/v2/logs/greengrass.log
@@ -40,7 +64,7 @@ This example is written from scratch and it is a good place to start after 'Hell
     ...
     ```
 
- 6. After specifying the topic filter as `ml/example/imgclassification` in MQTT test client, perform Subscribe. The output should be something like the one below.
+ 1. After specifying the topic filter as `ml/example/imgclassification` in MQTT test client, perform Subscribe. The output should be something like the one below.
     ![mqtt](./imgs/1/mqtt.png)
 
 <br>
@@ -73,7 +97,7 @@ AWS has provided public components since IoT Greengrass v2, and you can freely i
 ### Deploy Inference codes
 1. Compress all contents of the `model` folder into `image_classification.zip` and upload it to your S3 bucket.
 2. Edit the `img-classification.json` file in the `recipes` folder. The Uri of the Artifacts entry should be your S3 path.
-3. Deploy the Model Store component. We recommend deploying from the web console or using the AWS CLI.   
+3. Deploy the Model Store component. We recommend deploying from the web console or using the greengrass-cli.
 4. Open a new terminal window in the Cloud9 IDE to check the greengrass log and component log. 
     ```
     $ sudo tail -f /greengrass/v2/logs/greengrass.log
@@ -123,7 +147,7 @@ AWS has provided public components since IoT Greengrass v2, and you can freely i
 ### Deploy Inference codes
 1. Compress all contents of the `model` folder into `object_detection.zip` and upload it to your S3 bucket.
 2. Edit the `obj-detection.json` file in the `recipes` folder. The Uri of the Artifacts entry should be your S3 path.
-3. Deploy the Model Store component. We recommend deploying from the web console or using the AWS CLI.   
+3. Deploy the Model Store component. We recommend deploying from the web console or using the greengrass-cli.   
 4. Open a new terminal window in the Cloud9 IDE to check the greengrass log and component log. 
     ```
     $ sudo tail -f /greengrass/v2/logs/greengrass.log

@@ -6,14 +6,13 @@ from sys import stdout
 from awsiot.greengrasscoreipc.model import QOS
 
 # Set all the constants
-SCORE_THRESHOLD = 0.15
+SCORE_THRESHOLD = 0.25
 MAX_NO_OF_RESULTS = 3
-SHAPE = (224, 224)
+SHAPE = (224,224)
 QOS_TYPE = QOS.AT_LEAST_ONCE
 TIMEOUT = 10
 
 # Intialize all the variables with default values
-DEFAULT_ACCELERATOR = "cpu"
 DEFAULT_PREDICTION_INTERVAL_SECS = 5
 ENABLE_SEND_MESSAGE = True
 TOPIC = "ml/example/imgclassification"
@@ -23,7 +22,6 @@ logger = getLogger()
 handler = StreamHandler(stdout)
 logger.setLevel(INFO)
 logger.addHandler(handler)
-
 
 # Get the model directory and images directory from the env variables.
 MODEL_DIR = path.expandvars(environ.get("MODEL_DIR"))
