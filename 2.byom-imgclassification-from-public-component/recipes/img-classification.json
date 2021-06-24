@@ -75,8 +75,3 @@
   ],
   "Lifecycle": {}
 }
-
-sudo /greengrass/v2/bin/greengrass-cli deployment list
-
-sudo /greengrass/v2/bin/greengrass-cli --ggcRootPath /greengrass/v2 deployment create --remove "com.example.HelloWorld"
-aws greengrassv2 cancel-deployment --deployment-id a42e36c7-3d64-4b15-8df1-b5baee28f4cd
