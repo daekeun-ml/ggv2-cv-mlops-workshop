@@ -30,12 +30,12 @@ This example is written from scratch and it is a good place to start after 'Hell
             "ComponentName": "com.example.ImgClassification",
             "ComponentVersion": "1.0.0",
             "SendMessage": "True",
-            "Topic": "ml/example/imgclassification2",
+            "Topic": "[YOUR-TOPIC]",
             "PredictionIntervalSecs": 5,
             "Timeout": 10
         },
         "Artifacts": {
-            "S3Bucket": "sagemaker-us-east-1-143656149352",
+            "S3Bucket": "[YOUR-S3-BUCKET]",
             "S3Prefix": "ggv2/artifacts",
             "ZipArchiveName": "my-model"
         },
@@ -46,12 +46,12 @@ This example is written from scratch and it is a good place to start after 'Hell
         }
     } 
     ```
-3. Run the `init.sh` file on your local machine or the Cloud9 IDE. In this cell script, the following tasks are performed automatically.
+3. Run the `init_ubuntu.sh` or `init_mac.sh` file on your local machine or the Cloud9 IDE. In this cell script, the following tasks are performed automatically.
    * Modify json recipe file in `recipes` folder.
    * Modify `config_utils.py` in `artifacts` folder.
    * Compress all contents of the `artifacts` folder into zip file and upload it to your S3 bucket.
    * Register your custom component to Greengrass v2. 
-4. Deploy the component. We recommend deploying from the web console or using the greengrass-cli.
+4. Deploy the component. We recommend deploying from the web console or using the `greengrass-cli`.
 5. Open a new terminal window in the Cloud9 IDE to check the greengrass log and component log. 
     ```
     $ sudo tail -f /greengrass/v2/logs/greengrass.log
