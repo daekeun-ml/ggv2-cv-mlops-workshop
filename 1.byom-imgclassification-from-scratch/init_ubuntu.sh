@@ -11,8 +11,6 @@ echo ==--------Configurations---------==
 COMPONENT_NAME=$(cat config.json | jq -r '.Component.ComponentName')
 COMPONENT_VERSION=$(cat config.json | jq -r '.Component.ComponentVersion')
 ENABLE_SEND_MESSAGE=$(cat config.json | jq -r '.Component.SendMessage')
-TOPIC=$(cat config.json | jq -r '.Component.Topic')
-TOPIC2=${TOPIC//\//\\/}
 PREDICTION_INTERVAL_SECS=$(cat config.json | jq -r '.Component.PredictionIntervalSecs')
 TIMEOUT=$(cat config.json | jq -r '.Component.Timeout')
 
@@ -27,7 +25,6 @@ MODEL_INPUT_SHAPE=$(cat config.json | jq -r '.Parameters.ModelInputShape')
 
 echo component name: $COMPONENT_NAME
 echo component version: $COMPONENT_VERSION
-echo topic: $TOPIC
 echo zip archive name: $ZIP_ARCHIVE_NAME
 echo .
 
@@ -41,7 +38,6 @@ mv ${OLD_RECIPE_JSON} ${NEW_RECIPE_JSON}
 sed -i "s/\[YOUR-BUCKET\]/${S3_BUCKET}/g" ${NEW_RECIPE_JSON}
 sed -i "s/\[YOUR-PREFIX\]/${S3_PREFIX2}/g" ${NEW_RECIPE_JSON} 
 sed -i "s/my-model/${ZIP_ARCHIVE_NAME}/g" ${NEW_RECIPE_JSON} 
-sed -i "s/ml\/example\/imgclassification/${TOPIC2}/g" ${NEW_RECIPE_JSON} 
 sed -i "s/\(\"ComponentVersion\"\)\(.*\)/\1: \"${COMPONENT_VERSION}\",/g" ${NEW_RECIPE_JSON}
 
 echo old json recipe: $OLD_RECIPE_JSON
@@ -59,7 +55,6 @@ sed -i "s/\(SHAPE\)\(.*\)/\1 = ${MODEL_INPUT_SHAPE}/g" ${CONFIG_PY}
 sed -i "s/\(TIMEOUT\)\(.*\)/\1 = ${TIMEOUT}/g" ${CONFIG_PY}
 sed -i "s/\(DEFAULT_PREDICTION_INTERVAL_SECS\)\(.*\)/\1 = ${PREDICTION_INTERVAL_SECS}/g" ${CONFIG_PY}
 sed -i "s/\(ENABLE_SEND_MESSAGE\)\(.*\)/\1 = ${ENABLE_SEND_MESSAGE}/g" ${CONFIG_PY}
-sed -i "s/\(TOPIC\)\(.*\)/\1 = \"${TOPIC2}\"/g" ${CONFIG_PY}
 
 echo .
 

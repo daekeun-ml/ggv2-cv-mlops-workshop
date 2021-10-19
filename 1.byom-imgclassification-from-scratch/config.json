@@ -9,12 +9,12 @@
         "ComponentName": "com.example.ImgClassification",
         "ComponentVersion": "1.0.0",
         "SendMessage": "True",
-        "Topic": "ml/example/imgclassification2",
+        "Topic": "ml/example/imgclassification",
         "PredictionIntervalSecs": 5,
         "Timeout": 10
     },
     "Artifacts": {
-        "S3Bucket": "sagemaker-us-east-1-143656149352",
+        "S3Bucket": "[YOUR-BUCKET]",
         "S3Prefix": "ggv2/artifacts",
         "ZipArchiveName": "my-model"
     },

@@ -29,7 +29,9 @@
  
             "Lifecycle": {
                 "Install": {
-                    "script": "pip3 install -r {artifacts:decompressedPath}/my-model/requirements.txt"
+                    "RequiresPrivilege": true,
+                    "Script": "/bin/bash {artifacts:decompressedPath}/my-model/install.sh",
+                    "timeout": "900"
                 },
              "setEnv": {
                 "MODEL_DIR": "{artifacts:decompressedPath}/my-model/model",
@@ -48,3 +50,4 @@
         }
     ]   
  }
+ 
