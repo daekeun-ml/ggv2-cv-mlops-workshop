@@ -1,7 +1,7 @@
 {
     "RecipeFormatVersion": "2020-01-25",
     "ComponentName": "com.example.ImgClassification",
-    "ComponentVersion": "1.0.3",
+    "ComponentVersion": "1.0.0",
     "ComponentDescription": "Custom Image classification inference component using DLR.",
     "ComponentPublisher": "AWS",
      "ComponentConfiguration": {
