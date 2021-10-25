@@ -1,20 +1,20 @@
 {
     "Project": {
         "Name": "MLInferenceFromScratch",
-        "Account": "12345*******",
-        "Region": "us-east-1",
+        "Account": "143656149352",
+        "Region": "ap-northeast-2",
         "Profile": "ggv2-demo"
     },
     "Component": {
         "ComponentName": "com.example.ImgClassification",
-        "ComponentVersion": "1.0.0",
+        "ComponentVersion": "1.0.3",
         "SendMessage": "True",
-        "Topic": "ml/example/imgclassification",
+        "Topic": "ml/example/imgclassification2",
         "PredictionIntervalSecs": 5,
         "Timeout": 10
     },
     "Artifacts": {
-        "S3Bucket": "[YOUR-BUCKET]",
+        "S3Bucket": "mybucket-143656149352",
         "S3Prefix": "ggv2/artifacts",
         "ZipArchiveName": "my-model"
     },

@@ -26,6 +26,6 @@ logger.addHandler(handler)
 # Get the model directory and images directory from the env variables.
 MODEL_DIR = path.expandvars(environ.get("MODEL_DIR"))
 SAMPLE_IMAGE_DIR = path.expandvars(environ.get("SAMPLE_IMAGE_DIR"))
-# MODEL_DIR = f'{os.getcwd()}/model'
-# SAMPLE_IMAGE_DIR = f'{os.getcwd()}/sample_images'
+#MODEL_DIR = f'{os.getcwd()}/model'
+#SAMPLE_IMAGE_DIR = f'{os.getcwd()}/sample_images'
 LABEL_FILE = path.join(MODEL_DIR, "imagenet1000_clsidx_to_labels.txt")

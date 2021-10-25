@@ -62,6 +62,7 @@ echo ==--------Compress Artifacts---------==
 cd artifacts
 zip ${ZIP_ARCHIVE_NAME}.zip -r .
 S3_PATH="s3://${S3_BUCKET}/${S3_PREFIX}/${ZIP_ARCHIVE_NAME}.zip"
+
 echo Uploading to $S3_PATH
 aws s3 cp ${ZIP_ARCHIVE_NAME}.zip s3://${S3_BUCKET}/${S3_PREFIX}/${ZIP_ARCHIVE_NAME}.zip
 echo .
@@ -70,3 +71,7 @@ echo ==--------Creating Component---------==
 cd ../recipes 
 aws greengrassv2 create-component-version --inline-recipe fileb://${COMPONENT_NAME}-${COMPONENT_VERSION}.json 
 echo .
+
+
+echo  ==--------Delete Zip Archive  ---------==
+rm ${ZIP_ARCHIVE_NAME}.zip

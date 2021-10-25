@@ -16,7 +16,6 @@ import IPCUtils as ipc_utils
 import awsiot.greengrasscoreipc.client as client
 
 
-# Get the ipc client
 try:
     ipc = ipc_utils.IPCUtils()
     ipc_client = client.GreengrassCoreIPCClient(ipc.connect())
